@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: deploy-docker-react
+
+steps:
+- name: frontend
+  image: node
+  commands:
+    - docker build -t jc/docker-react .
+    - docker container run -e CI=true jc/docker-react yarn test -- --coverage
