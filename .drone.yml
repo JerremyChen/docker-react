@@ -6,8 +6,15 @@ workspace:
   path: /app
 
 steps:
-- name: frontend
-  image: node:16-alpine
-  commands:
-    - yarn install
-    - yarn test -- --coverage
+  # - name: frontend
+  #   image: node:16-alpine
+  #   commands:
+  #     - yarn install
+  #     - yarn test -- --coverage
+  - name: frontend
+    image: plugins/docker
+    commands:
+      - docker image build -t jc/docker-react .
+      - docker container run jc/docker-react yarn test -- --coverage
+    settings:
+      dockerfile: .
