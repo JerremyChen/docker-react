@@ -2,9 +2,12 @@ kind: pipeline
 type: docker
 name: deploy-docker-react
 
+workspace:
+  path: /app
+
 steps:
 - name: frontend
-  image: node
+  image: node:16-alpine
   commands:
-    - docker build -t jc/docker-react .
-    - docker container run -e CI=true jc/docker-react yarn test -- --coverage
+    - yarn install
+    - yarn test -- --coverage
