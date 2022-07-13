@@ -14,7 +14,7 @@ steps:
   - name: frontend
     image: plugins/docker
     commands:
-      - docker image build -t jc/docker-react .
-      - docker container run jc/docker-react yarn test -- --coverage
+      - sudo docker image build -t jc/docker-react .
+      - sudo docker container run jc/docker-react yarn test -- --coverage
     settings:
       dockerfile: .
