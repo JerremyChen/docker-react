@@ -6,15 +6,14 @@ workspace:
   path: /app
 
 steps:
-  # - name: frontend
-  #   image: node:16-alpine
-  #   commands:
-  #     - yarn install
-  #     - yarn test -- --coverage
   - name: frontend
-    image: plugins/docker
+    image: node:16-alpine
     commands:
-      - sudo docker image build -t jc/docker-react .
-      - sudo docker container run jc/docker-react yarn test -- --coverage
-    settings:
-      dockerfile: .
+      - yarn install
+      - yarn test -- --coverage
+  - name: proxy
+    image: nginx:1.23-alpine
+    depends_on: [frontend]
+    commands:
+      - cp -f /app/build /usr/share/nginx/html
+  
