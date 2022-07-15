@@ -11,9 +11,11 @@ steps:
     commands:
       - yarn install
       - yarn test -- --coverage
+      - yarn build
   - name: proxy
     image: nginx:1.23-alpine
     depends_on: [frontend]
     commands:
+      - pwa
       - cp -f /app/build /usr/share/nginx/html
   
