@@ -8,6 +8,8 @@ workspace:
 steps:
   - name: frontend
     image: node:16-alpine
+    environment:
+      - CI=true
     commands:
       - yarn install
       - yarn test -- --coverage
@@ -16,6 +18,6 @@ steps:
     image: nginx:1.23-alpine
     depends_on: [frontend]
     commands:
-      - pwa
+      - pwd
       - cp -f /app/build /usr/share/nginx/html
   
