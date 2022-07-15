@@ -19,5 +19,5 @@ steps:
     depends_on: [frontend]
     commands:
       - pwd
-      - cp -f /app/build /usr/share/nginx/html
+      - cp -r /app/build /usr/share/nginx/html
   
