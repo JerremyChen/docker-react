@@ -9,7 +9,7 @@ steps:
   - name: frontend
     image: node:16-alpine
     environment:
-      - CI=true
+      CI=true
     commands:
       - yarn install
       - yarn test -- --coverage
