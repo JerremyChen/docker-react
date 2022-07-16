@@ -2,28 +2,30 @@ kind: pipeline
 type: docker
 name: deploy-docker-react
 
-workspace:
-  path: /app
+# workspace:
+#   path: /app
 
 steps:
-  - name: frontend
-    image: node:16-alpine
-    environment:
-      CI: true
-    commands:
-      - yarn install
-      - yarn test -- --coverage
-      - yarn build
-  - name: proxy
-    image: nginx:1.23-alpine
-    depends_on: [frontend]
-    commands:
-      - pwd
-      - cp -r /app/build /usr/share/nginx/html
-  - name: docker  
+  # - name: frontend
+  #   image: node:16-alpine
+  #   environment:
+  #     CI: true
+  #   commands:
+  #     - yarn install
+  #     - yarn test -- --coverage
+  #     - yarn build
+  # - name: proxy
+  #   image: nginx:1.23-alpine
+  #   depends_on: [frontend]
+  #   commands:
+  #     - pwd
+  #     - cp -r /app/build /usr/share/nginx/html
+  - name: publish
     image: plugins/docker
     settings:
-      username: jerremychen
-      password: 1qaz@WSX3edc
-      repo: jc/docker-react
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: jerremychen/docker-react
       tags: latest
