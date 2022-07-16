@@ -20,4 +20,10 @@ steps:
     commands:
       - pwd
       - cp -r /app/build /usr/share/nginx/html
-  
+  - name: docker  
+    image: plugins/docker
+    settings:
+      username: jerremychen
+      password: 1qaz@WSX3edc
+      repo: jc/docker-react
+      tags: latest
